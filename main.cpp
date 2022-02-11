@@ -18,7 +18,9 @@ using std::queue;
 
 const int SCREEN_WIDTH = 600;
 const int SCREEN_HEIGHT = 600;
-const int RECT_SIZE = 25;
+const int RECT_SIZE = 35;           //CHANGE THIS TO MODIFY THE SIZE OF THE GRID
+const int DFS_DELAY = 10;           //CHANGE THIS TO MODIFY THE SPEED OF DEPTH FIRST SEARCH
+const int SAW_ITERUPDATE = 10000;   //CHANGE THIS TO MODIFY RATE OF UPDATE OF SELF AVOIDING WALK
 
 //The height and width in terms of vertices.
 const int h = (int)((SCREEN_HEIGHT/RECT_SIZE)/2);
@@ -32,6 +34,10 @@ vector<Node> nodes;
 vector<Edge> edges;
 
 std::default_random_engine rng;
+
+/*
+UTILITY FUNCTIONS
+*/
 
 //Returns the index of the edge connecting the two vertices whose indeces are given
 int getEdge(int from, int to){
@@ -149,6 +155,9 @@ void drawNode(int i, bool remove, int from){
     
 }
 
+/*
+OPTIMIZATION FUNCTIONS
+*/
 
 void countIslandsRecur(vector<bool> &M, int i, int j)
 {
@@ -216,6 +225,11 @@ int countCulsDeSac(vector<bool> M, int pt){
     }
     return c;    
 }
+
+/*
+ALGORITHMS
+*/
+
 
 //Self avoiding walk
 void UniquePath(){
@@ -383,7 +397,7 @@ void DFS(){
         //Remove these lines for instant generation
         drawNode(u, false, from);
         SDL_RenderPresent(render);
-        SDL_Delay(3);
+        SDL_Delay(DFS_DELAY);
         
         vector<int> adj = getAdjacent(u);
         while(!adj.empty()){
@@ -406,7 +420,7 @@ void DFS(){
             //Remove these lines for instant generation
             drawEdge(v, false);
             SDL_RenderPresent(render);
-            SDL_Delay(3);
+            SDL_Delay(DFS_DELAY);
         }
     }
 
@@ -551,7 +565,7 @@ void Dijkstra(){
 
 bool innit(){
     if (SDL_Init(SDL_INIT_VIDEO) < 0){
-        cout << "Screen couldn't render: " << SDL_GetError() << "\n";
+        cout << "SDL couldn't be initialized: " << SDL_GetError() << "\n";
         return false;
     } 
     
@@ -576,7 +590,7 @@ int main(int argc, char* args[] ){
     srand((unsigned int)time(0));
     rng = std::default_random_engine();
 
-    if (!innit())
+    if (!innit())   //SDL initialization
         return 0;
 
     render = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
