@@ -117,7 +117,7 @@ vector<int> getAdjacent(int u){
     return res;
 }
 
-//Comparation function for edgeIndex priority queue
+//Comparison function for edgeIndex priority queue
 class CompareEdge{
     public:
         bool operator()(int a, int b){
