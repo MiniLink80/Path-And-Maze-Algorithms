@@ -1,12 +1,10 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <random>
 #include <queue>
 #include <stack>
 #include <algorithm>
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
 #include "graph.h"
 
 using std::cout;
@@ -237,8 +235,8 @@ void UniquePath(){
     SDL_RenderClear(render);
     SDL_RenderPresent(render);
 
-    std::ofstream f;
-    f.open("out.txt");
+    //std::ofstream f;
+    //f.open("out.txt");
     
 
     createEdgesAndVertices(nodes, edges);
@@ -369,7 +367,7 @@ void UniquePath(){
     }
     SDL_RenderPresent(render);
 
-    f.close();
+    //f.close();
 }
 
 //Depth first search-based random maze generation
