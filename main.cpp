@@ -18,7 +18,7 @@ const int SCREEN_WIDTH = 600;
 const int SCREEN_HEIGHT = 600;
 const int RECT_SIZE = 35;           //CHANGE THIS TO MODIFY THE SIZE OF THE GRID
 const int DFS_DELAY = 10;           //CHANGE THIS TO MODIFY THE SPEED OF DEPTH FIRST SEARCH
-const int SAW_ITERUPDATE = 10000;   //CHANGE THIS TO MODIFY RATE OF UPDATE OF SELF AVOIDING WALK
+const int SAW_ITERUPDATE = 1000;   //CHANGE THIS TO MODIFY RATE OF UPDATE OF SELF AVOIDING WALK
 
 //The height and width in terms of vertices.
 const int h = (int)((SCREEN_HEIGHT/RECT_SIZE)/2);
@@ -338,7 +338,7 @@ void UniquePath(){
         
         //Render everything every n iterations
         iter++;
-        if (iter == 10000){
+        if (iter >= SAW_ITERUPDATE){
             SDL_SetRenderDrawColor(render, 10,10,10,255);
             SDL_RenderClear(render);
             for(int i = 0; i < nodes.size(); i++){
